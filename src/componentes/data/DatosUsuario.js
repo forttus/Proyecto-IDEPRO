@@ -17,12 +17,36 @@ const imageStyle = {
 };
 
 const columns = [
+  
+  {
+    field: 'Login',
+    headerName: 'Login',
+    width: 120,
+    editable: true,
+    
+  },
+  {
+    field: 'Password',
+    headerName: 'Password',
+    width: 150,
+    editable: true,
+    renderCell: (params) => (
+      <span style={{ fontWeight: 'bold', color: 'black' }}>
+        {params.value}
+      </span>
+    ),
+  },
+  {
+    field: 'Nombres',
+    headerName: 'Nombre Completo',
+    width: 380,
+    editable: true,
+  },
   {
     field: 'Foto',
     headerName: 'Foto',
     width: 60,
     renderCell: (params) => (
-      
       params.value ? (
         <img
           src={ params.value }
@@ -37,24 +61,6 @@ const columns = [
         />
       )
     ),
-  },
-  {
-    field: 'Login',
-    headerName: 'Login',
-    width: 120,
-    editable: true,
-  },
-  {
-    field: 'Password',
-    headerName: 'Password',
-    width: 150,
-    editable: true,
-  },
-  {
-    field: 'Nombres',
-    headerName: 'Nombre Completo',
-    width: 380,
-    editable: true,
   },
   
 ];
@@ -106,7 +112,7 @@ const DatosUsuario = () => {
         label="Buscar Usuario"
         variant="outlined"
         fullWidth
-        margin="normal"
+        margin= 'dense'
         value={busqueda}
         onChange={(e) => setBusqueda(e.target.value)}
       />
