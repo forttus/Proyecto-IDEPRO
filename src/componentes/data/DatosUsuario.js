@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { TextField, Box } from '@mui/material';
+import { TextField, Box, Typography, CircularProgress} from '@mui/material';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
-import axios from 'axios'; // Importamos axios
+import axios from 'axios'; 
 import CryptoJS from 'crypto-js';
+import CircularWithValueLabel from '../ComponeteCargando';
+
 const clave = "PASSWORD";
-const rutaImagen = "/imagenes/listaUsuario.png"
+const rutaImagen = "imagenes/usuario.png"
+
 const imageStyle = {
   width: '40px',
   height: '40px',
@@ -17,24 +20,28 @@ const columns = [
   {
     field: 'Foto',
     headerName: 'Foto',
-    width: 160,
+    width: 60,
     renderCell: (params) => (
       
       params.value ? (
         <img
-          src={ params.value ?? rutaImagen }
+          src={ params.value }
           alt="Foto"
           style={imageStyle}
         />
       ) : (
-        <div style={{ width: '40px', height: '40px', backgroundColor: '#ccc', borderRadius: '50%' }}></div>
+        <img
+          src={ rutaImagen }
+          alt="Foto"
+          style={imageStyle}
+        />
       )
     ),
   },
   {
     field: 'Login',
     headerName: 'Login',
-    width: 80,
+    width: 120,
     editable: true,
   },
   {
@@ -46,7 +53,7 @@ const columns = [
   {
     field: 'Nombres',
     headerName: 'Nombre Completo',
-    width: 320,
+    width: 380,
     editable: true,
   },
   
@@ -55,6 +62,7 @@ const columns = [
 const DatosUsuario = () => {
   const [usuarios, setUsuarios] = useState([]);
   const [busqueda, setBusqueda] = useState('');
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -62,29 +70,27 @@ const DatosUsuario = () => {
         const response = await axios.get('http://10.0.1.157:3000/api/usuarios');
         const data = response.data;
   
-        // Transformamos los datos para incluir un campo `id`
         const transformedData = data.map((row) => {
           const bytes = CryptoJS.AES.decrypt(row.Password, clave);
           const textoOriginal = bytes.toString(CryptoJS.enc.Utf8);
   
           return {
             ...row,
-            Password: textoOriginal, // opcional: reemplazar el cifrado por el texto plano
-            id: row.IdUsuario
+            Password: textoOriginal
           };
         });
   
-        setUsuarios(transformedData); // Guardamos los datos en el estado
+        setUsuarios(transformedData); 
       } catch (error) {
         console.error('Error al consumir la API:', error);
+      } finally {
+        setLoading(false); // Finaliza la carga
       }
     };
   
     fetchData(); // Llamamos a la función al cargar el componente
   }, []);
   
-
-  // Filtrado de los datos
   const rowsFiltradas = usuarios.filter((usuario) => {
     const text = busqueda.toLowerCase();
     return (
@@ -93,11 +99,9 @@ const DatosUsuario = () => {
     );
   });
 
-  console.log(usuarios);
-  
-
   return (
-    <Box sx={{ height: 400, width: '100%' }}>
+    <Box className="datagrid-container" >
+
       <TextField
         label="Buscar Usuario"
         variant="outlined"
@@ -106,10 +110,11 @@ const DatosUsuario = () => {
         value={busqueda}
         onChange={(e) => setBusqueda(e.target.value)}
       />
-      <DataGrid
+      {loading ? (<CircularWithValueLabel/>):(
+        <DataGrid
         rows={rowsFiltradas} // Usamos el arreglo filtrado aquí
         columns={columns}
-        // getRowId={(row) => row.IdUsuario} 
+        getRowId={(row) => row.IdUsuario} 
         initialState={{
           pagination: {
             paginationModel: {
@@ -117,7 +122,7 @@ const DatosUsuario = () => {
             },
           },
         }}
-        pageSizeOptions={[5, 10, 25]} // Opciones de tamaño de página
+        pageSizeOptions={[5, 10,25,]} // Opciones de tamaño de página
         slots={{
           toolbar: GridToolbar, // Agregamos el toolbar con el botón de exportación
         }}
@@ -128,8 +133,7 @@ const DatosUsuario = () => {
             },
           },
         }}
-
-      />
+      />)}
     </Box>
   );
 };
