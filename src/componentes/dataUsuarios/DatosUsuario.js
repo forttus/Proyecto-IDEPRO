@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { TextField, Box, Typography, CircularProgress} from '@mui/material';
+import { TextField, Box} from '@mui/material';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import axios from 'axios'; 
 import CryptoJS from 'crypto-js';
-import CircularWithValueLabel from '../ComponeteCargando';
+import CircularWithValueLabel from '../componenteUI/ComponeteCargando';
+import HalfRating from '../componenteUI/HalfRating';
 
 const clave = "PASSWORD";
 const rutaImagen = "imagenes/usuario.png"
@@ -62,6 +63,13 @@ const columns = [
       )
     ),
   },
+  {
+    field: 'calificacion',
+    headerName: 'Calificacion',
+    width: 180,
+    editable: true,
+    renderCell: (params) => <HalfRating />, // Renderiza el componente HalfRating
+  },
   
 ];
 
@@ -83,6 +91,7 @@ const DatosUsuario = () => {
           return {
             ...row,
             Password: textoOriginal
+            // calificacion: <HalfRating/> // Asegúrate de que la calificación tenga un valor por defecto
           };
         });
   

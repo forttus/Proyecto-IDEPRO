@@ -1,16 +1,25 @@
 import './App.css';
-import DatosUsuario from './componentes/data/DatosUsuario';
+import DatosUsuario from './componentes/dataUsuarios/DatosUsuario';
+import EliminacionFolder from './componentes/paginaEliminacion/Eliminacion';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from './componentes/paginaHome/Home';
+import Navbar from './componentes/paginaNavbar/Navbar';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Lista de Usuarios FRODDI</h1>
-      </header>
-      <DatosUsuario></DatosUsuario>
-      
-    </div>
+    <>
+     <Router>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/usuarios" element={<DatosUsuario />} />
+        <Route path="/folders" element={<EliminacionFolder />} />
+      </Routes>
+    </Router>
+   
+    </>
   );
+    
 }
 
 export default App;
