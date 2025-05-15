@@ -12,7 +12,7 @@ const Home =() => {
   fontFamily: "'Comic Sans MS', cursive",
   boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
 }}>
-  <h1>¡¡ SHIRLEY YA NO RENIEGUES CAT !! 🐾</h1>
+  <h1> 🐾 ¡¡ SHIRLEY YA NO RENIEGUES !! 🐾</h1>
   <img 
     src={url} 
     alt="Un gato bonito para Shirley" 
