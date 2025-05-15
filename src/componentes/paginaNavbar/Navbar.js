@@ -8,7 +8,7 @@ const Navbar = () => {
       <Toolbar>
         {/* Logo o título */}
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          SOPORTE FORDDI V1.0
+          SOPORTE FORDDY V1.0
         </Typography>
 
         {/* Botones de navegación */}
