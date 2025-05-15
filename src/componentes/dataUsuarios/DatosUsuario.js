@@ -18,6 +18,26 @@ const imageStyle = {
 };
 
 const columns = [
+   {
+    field: 'Foto',
+    headerName: 'Foto',
+    width: 60,
+    renderCell: (params) => (
+      params.value ? (
+        <img
+          src={ params.value }
+          alt="Foto"
+          style={imageStyle}
+        />
+      ) : (
+        <img
+          src={ rutaImagen }
+          alt="Foto"
+          style={imageStyle}
+        />
+      )
+    ),
+  },
   
   {
     field: 'Login',
@@ -43,33 +63,20 @@ const columns = [
     width: 380,
     editable: true,
   },
+ 
   {
-    field: 'Foto',
-    headerName: 'Foto',
-    width: 60,
-    renderCell: (params) => (
-      params.value ? (
-        <img
-          src={ params.value }
-          alt="Foto"
-          style={imageStyle}
-        />
-      ) : (
-        <img
-          src={ rutaImagen }
-          alt="Foto"
-          style={imageStyle}
-        />
-      )
-    ),
-  },
-  {
-    field: 'calificacion',
-    headerName: 'Calificacion',
-    width: 180,
+    field: 'Agencia',
+    headerName: 'Agencia',
+    width: 320,
     editable: true,
-    renderCell: (params) => <HalfRating />, // Renderiza el componente HalfRating
   },
+  // {
+  //   field: 'calificacion',
+  //   headerName: 'Calificacion',
+  //   width: 180,
+  //   editable: true,
+  //   renderCell: (params) => <HalfRating />, // Renderiza el componente HalfRating
+  // },
   
 ];
 
@@ -115,18 +122,39 @@ const DatosUsuario = () => {
   });
 
   return (
-    <Box className="datagrid-container" >
+    <Box className="datagrid-container"
+    sx={{
+    display: 'flex',
+    flexDirection: 'column',
+    // width: '100%',
+    padding: 3,
+    margin: 'auto',
+  }}
+    >
 
-      <TextField
+      <TextField 
         label="Buscar Usuario"
-        variant="outlined"
-        fullWidth
+        variant='outlined'
         margin= 'dense'
         value={busqueda}
         onChange={(e) => setBusqueda(e.target.value)}
+        sx={{
+          '& .MuiOutlinedInput-root': {
+            '& fieldset': {
+              borderColor: 'black', // color del borde
+              borderWidth: '3px',          // grosor del borde
+              borderRadius: '12px'
+            },
+            '&:hover fieldset': {
+              borderColor: 'dark',
+              borderWidth: '3px',
+              borderRadius: '12px'
+            },
+          },
+        }}
       />
       {loading ? (<CircularWithValueLabel/>):(
-        <DataGrid
+        <DataGrid sx={{ border: "3px solid #333", borderRadius: '15px', padding:'12px' }}
         rows={rowsFiltradas} // Usamos el arreglo filtrado aquí
         columns={columns}
         getRowId={(row) => row.IdUsuario} 
@@ -139,7 +167,7 @@ const DatosUsuario = () => {
         }}
         pageSizeOptions={[5, 10,25,]} // Opciones de tamaño de página
         slots={{
-          toolbar: GridToolbar, // Agregamos el toolbar con el botón de exportación
+          toolbar: GridToolbar, 
         }}
         slotProps={{
           toolbar: {

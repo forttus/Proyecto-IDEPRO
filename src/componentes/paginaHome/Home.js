@@ -4,7 +4,7 @@ const Home =() => {
   return (
     <div className="App">
       <header className="App-header">
-        <h1> FRODDI</h1>
+        <h1> FRODDI !! SHYR NO RENIEGUESSSS !! </h1>
       </header>
     </div>
   )
