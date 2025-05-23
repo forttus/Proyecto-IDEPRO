@@ -4,7 +4,9 @@ import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import axios from 'axios'; 
 import CryptoJS from 'crypto-js';
 import CircularWithValueLabel from '../componenteUI/ComponeteCargando';
-import HalfRating from '../componenteUI/HalfRating';
+
+import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined';
+import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 
 const clave = "PASSWORD";
 const rutaImagen = "imagenes/usuario.png"
@@ -70,14 +72,17 @@ const columns = [
     width: 320,
     editable: true,
   },
-  // {
-  //   field: 'calificacion',
-  //   headerName: 'Calificacion',
-  //   width: 180,
-  //   editable: true,
-  //   renderCell: (params) => <HalfRating />, // Renderiza el componente HalfRating
-  // },
-  
+  {
+    field: 'Activo',
+    headerName: 'Activo',
+    width: 180,
+    editable: true,
+    renderCell: (params) => {
+      console.log('goku!!', params.row.Activo);
+      const dat = params.row.Activo?<CheckOutlinedIcon color="success"  sx={{ fontSize: 40 }}/>:<ClearOutlinedIcon color="error"  sx={{ fontSize: 40 }}/>
+    return dat
+  } // Renderiza el componente HalfRating
+  },
 ];
 
 const DatosUsuario = () => {
@@ -97,8 +102,7 @@ const DatosUsuario = () => {
   
           return {
             ...row,
-            Password: textoOriginal
-            // calificacion: <HalfRating/> // Asegúrate de que la calificación tenga un valor por defecto
+            Password: textoOriginal,
           };
         });
   

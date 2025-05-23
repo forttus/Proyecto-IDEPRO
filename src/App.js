@@ -12,6 +12,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
+        {/* <Route path="*" element={<Home />} /> */}
         <Route path="/usuarios" element={<DatosUsuario />} />
         <Route path="/folders" element={<EliminacionFolder />} />
       </Routes>

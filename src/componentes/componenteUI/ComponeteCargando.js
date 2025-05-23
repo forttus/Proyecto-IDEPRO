@@ -52,5 +52,5 @@ export default function CircularWithValueLabel() {
       };
     }, []);
   
-    return <CircularProgressWithLabel value={progress} />;
+    return <CircularProgressWithLabel sx={{Text: 'center'}} value={progress} />;
   }

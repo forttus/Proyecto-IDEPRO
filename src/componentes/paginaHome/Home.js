@@ -23,7 +23,7 @@ const Home =() => {
   )
 }
 
-Home.propTypes = {}
+// Home.propTypes = {}
 
 export default Home
 
