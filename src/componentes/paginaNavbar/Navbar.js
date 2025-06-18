@@ -1,4 +1,4 @@
-import React from "react";
+
 import { AppBar, Toolbar, Button, Typography } from "@mui/material";
 import { Link } from "react-router-dom"; // Si usas React Router
 
@@ -15,6 +15,7 @@ const Navbar = () => {
         <Button color="inherit" component={Link} to="/">Inicio</Button>
         <Button color="inherit" component={Link} to="/usuarios">Lista de Usuarios</Button>
         <Button color="inherit" component={Link} to="/folders">Elimnar Folders</Button>
+        <Button color="inherit" component={Link} to="/Evaluacion">Buscar Evaluacion</Button>
 
       </Toolbar>
     </AppBar>

@@ -12,11 +12,11 @@ const Home =() => {
   fontFamily: "'Comic Sans MS', cursive",
   boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
 }}>
-  <h1> 🐾 ¡¡ SHIRLEY YA NO RENIEGUES !! 🐾</h1>
+  <h3> 🐾 ¡¡ SHIRLEY YA NO RENIEGUES !! 🐾</h3>
   <img 
     src={url} 
     alt="Un gato bonito para Shirley" 
-    style={{ width: '100%', maxWidth: '600px', margin: '1rem auto', borderRadius: '10px' }}
+    style={{ width: '100%', maxWidth: '400px', margin: '1rem auto', borderRadius: '50%' }}
   />
   <p>Los gatos están aquí para ayudarte... y también para dormir en tu teclado 💻</p>
 </div>

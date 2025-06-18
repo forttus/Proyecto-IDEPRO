@@ -78,7 +78,7 @@ const columns = [
     width: 180,
     editable: true,
     renderCell: (params) => {
-      console.log('goku!!', params.row.Activo);
+      // console.log('goku!!', params.row.Activo);
       const dat = params.row.Activo?<CheckOutlinedIcon color="success"  sx={{ fontSize: 40 }}/>:<ClearOutlinedIcon color="error"  sx={{ fontSize: 40 }}/>
     return dat
   } // Renderiza el componente HalfRating
