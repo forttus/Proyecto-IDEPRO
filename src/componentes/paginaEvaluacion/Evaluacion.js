@@ -4,20 +4,15 @@ import React from 'react';
 import Button from '@mui/material/Button';
 import SearchIcon from '@mui/icons-material/Search';
 
-
-// Input
 import OutlinedInput from '@mui/material/OutlinedInput';
+import { useQuery } from '@tanstack/react-query';
 
-
-// Corregido: La clase debe extender de React.Component (no Comment)
 class ImpuntNoControlado extends React.Component {
   // Corregido: Convención correcta para createRef()
   idEvaluacion = React.createRef();
 
   handleClick = () => {
     const idEvaluacion = this.idEvaluacion.current.value;
-        
-    // Manejo de datos
     this.props.onSend(idEvaluacion);
   };
 
@@ -28,7 +23,7 @@ class ImpuntNoControlado extends React.Component {
         <OutlinedInput
             type='text'
             inputRef={ this.idEvaluacion }
-            placeholder='ID de la evaluacion'
+            placeholder='CI del Cliente'
         />
         <Button 
             variant="contained" 
@@ -46,13 +41,29 @@ class ImpuntNoControlado extends React.Component {
 }
 
 export const Evaluacion = () => {
+
+  const { isPending, error, data } = useQuery({
+    queryKey: ['repoData'],
+    queryFn: () =>
+      fetch('http://10.0.1.157:3000/api/usuarios').then((res) =>
+        res.json(),
+      ),
+  })
+
+  if (isPending) return 'Loading...'
+
+  if (error) return 'An error has occurred: ' + error.message
+
+  console.log(data.data);
+  
+
   const send = (data) => {
     console.log(data);
   };
 
   return (
     <div>
-      <h1> Búsqueda de evaluaciones y habilitación </h1>
+      <h2> Búsqueda de deudas de los clientes </h2>
       <ImpuntNoControlado onSend={send} />
     </div>
   );

@@ -1,0 +1,49 @@
+/* src/components/BotonCircular/BotonCircular.css */
+.boton-circular {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  padding: 10px;
+  text-align: center;
+}
+
+.boton-circular:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.boton-circular .icono-contenedor {
+  margin-bottom: 10px;
+}
+
+.boton-circular .icono-contenedor img {
+  max-width: 70%;
+  height: auto;
+  border-radius: 100%;
+}
+
+.boton-circular .texto-boton {
+  font-size: 14px;
+  font-weight: bold;
+  color: rgb(245, 245, 245);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-shadow: 2px 2px 2px rgb(0, 5, 82);
+}
+
+
+.boton-circular .texto-boton {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+
