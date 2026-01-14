@@ -1,0 +1,26 @@
+.inicio-container{
+  display:flex;
+  justify-content:center;
+  gap:28px;
+  padding:36px 16px;
+  flex-wrap:wrap;
+  align-items:center;
+}
+.inicio-container .inicio-icon{
+  width:64px;
+  height:64px;
+  object-fit:contain;
+  display:block;
+}
+
+@media (max-width:600px){
+  .inicio-container{gap:14px;padding:20px}
+  .inicio-container .inicio-icon{width:48px;height:48px}
+  .boton-circular{padding:10px 12px}
+  .boton-circular .texto-boton{font-size:0.95rem}
+}
+
+@media (min-width:601px) and (max-width:1000px){
+  .inicio-container{gap:20px}
+  .inicio-container .inicio-icon{width:56px;height:56px}
+}

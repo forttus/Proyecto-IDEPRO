@@ -4,31 +4,32 @@ import { Link } from "react-router-dom";
 import usuarioImg from '../../assets/usuarios.png';
 import refiImg from '../../assets/refi.png';
 import folderesImg from '../../assets/folders.png';
+import './Inicio.css';
+
 const Inicio = () => {
-  
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-around', padding: '40px', textDecoration: 'none'}}>
+    <nav className="inicio-container" aria-label="Panel de inicio">
       <BotonCircular
-        style={{ textDecoration: 'none' }}
-        icono={<img src={folderesImg} />}
-        texto="FOLDERS"
-        component={Link} 
+        icono={<img src={folderesImg} alt="Ícono folders" className="inicio-icon" />}
+        texto="Folders"
+        component={Link}
         to="/folders"
       />
+
       <BotonCircular
-        icono={<img src={refiImg} />}
-        texto="PRESTAMOS"
+        icono={<img src={refiImg} alt="Ícono préstamos" className="inicio-icon" />}
+        texto="Préstamos"
         component={Link}
         to="/Evaluacion"
-        />
-      <BotonCircular
-        icono={<img src={usuarioImg} />}
-        texto="USUARIOS"
-        component={Link} 
-        to="/usuarios"
-        
       />
-    </div>
+
+      <BotonCircular
+        icono={<img src={usuarioImg} alt="Ícono usuarios" className="inicio-icon" />}
+        texto="Usuarios"
+        component={Link}
+        to="/usuarios"
+      />
+    </nav>
   );
 };
 
