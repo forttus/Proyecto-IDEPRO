@@ -45,7 +45,7 @@ export const Evaluacion = () => {
   const { isPending, error, data } = useQuery({
     queryKey: ['repoData'],
     queryFn: () =>
-      fetch('http://10.0.1.157:3000/api/usuarios').then((res) =>
+      fetch('http://localhost:4000/soporte/froddi/buscaCliente').then((res) =>
         res.json(),
       ),
   })
@@ -54,7 +54,7 @@ export const Evaluacion = () => {
 
   if (error) return 'An error has occurred: ' + error.message
 
-  console.log(data.data);
+  console.log(data);
   
 
   const send = (data) => {

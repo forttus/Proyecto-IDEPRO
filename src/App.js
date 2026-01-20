@@ -1,7 +1,9 @@
 import './App.css';
 import DatosUsuario from './componentes/dataUsuarios/DatosUsuario';
 import EliminacionFolder from './componentes/paginaEliminacion/Eliminacion';
-import { Evaluacion } from './componentes/paginaEvaluacion/Evaluacion';
+import DeudasCliente from './componentes/paginaEndeudamiento/DeudasCliente';
+import Waliky from './componentes/waliky/Waliky';
+import Onboarding from './componentes/onboarding/Onboarding';
 // TanStack imports
 import {
   QueryClient,
@@ -26,7 +28,9 @@ function App() {
             {/* <Route path="*" element={<Home />} /> */}
             <Route path="/usuarios" element={<DatosUsuario />} />
             <Route path="/folders" element={<EliminacionFolder />} />
-            <Route path="/Evaluacion" element={<Evaluacion />} />
+            <Route path="/Evaluacion" element={<DeudasCliente />} />
+            <Route path="/waliky" element={<Waliky />} />
+            <Route path="/onboarding" element={<Onboarding />} />
             <Route path="/inicio" element={<Inicio />} />
           </Routes>
         </Router>
