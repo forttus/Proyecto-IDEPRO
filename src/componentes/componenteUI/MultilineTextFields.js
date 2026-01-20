@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { Button,Alert } from '@mui/material';
+import { Button, Alert, Stack } from '@mui/material';
 import axios from 'axios'; 
 
 export default function MultilineTextFields() {
@@ -85,42 +85,59 @@ export default function MultilineTextFields() {
   return (
     <Box
       component="form"
-      sx={{ '& .MuiTextField-root': { m: 2, width: '800px' } }}
+      sx={{
+        '& .MuiTextField-root': {
+          m: 2,
+          width: { xs: '100%', sm: '600px', md: '800px' },
+        },
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}
       noValidate
       autoComplete="off"
     >
-      <div>
-      {alerta && (
-        <Alert variant="filled" severity="error">
-          Debes de llenar el campo de texto para continuar
-        </Alert>
-      )}
+      <div style={{ width: '100%', maxWidth: 900 }}>
+        {alerta && (
+          <Alert variant="filled" severity="error">
+            Debes de llenar el campo de texto para continuar
+          </Alert>
+        )}
+
         <TextField
           id="outlined-multiline-flexible"
           label="Copie y pegue el texto de las URL's"
           multiline
-          maxRows={4}
+          maxRows={8}
           value={urls} // Vincula el estado al valor del campo
           onChange={handleInputChange} // Maneja los cambios en el campo
           fullWidth
         />
-        <Button 
-          variant="contained" 
-          color="primary" 
-          sx={{ m: 2 }} 
-          onClick={procesarDatos}
-          >
-          
-          Eliminar
-        
-        </Button>
 
-        <Button variant="contained" color="secondary" sx={{ m: 2 }} onClick={limpiarDatos}>
-          Limpiar 
-        </Button>
-       
+        <Stack
+          direction={{ xs: 'column', sm: 'row' }}
+          spacing={2}
+          sx={{ m: 2, justifyContent: 'center' }}
+        >
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={procesarDatos}
+            fullWidth={{ xs: true, sm: false }}
+          >
+            Eliminar
+          </Button>
+
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={limpiarDatos}
+            fullWidth={{ xs: true, sm: false }}
+          >
+            Limpiar
+          </Button>
+        </Stack>
       </div>
-      
     </Box>
   );
 }

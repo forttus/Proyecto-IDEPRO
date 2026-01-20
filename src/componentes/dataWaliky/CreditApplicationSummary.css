@@ -1,0 +1,25 @@
+.credit-application-summary{
+  max-width:900px;
+  margin:0 auto;
+  padding:16px;
+  color:#222;
+  box-sizing:border-box;
+}
+.credit-application-summary h2{font-size:1.4rem;margin-bottom:12px}
+.credit-application-summary .sections{display:flex;flex-wrap:wrap;gap:12px}
+.credit-application-summary section{background:#fff;border:1px solid #eee;padding:12px;border-radius:6px;flex:1 1 100%;box-shadow:0 0 0 rgba(0,0,0,0)}
+.credit-application-summary section h3{font-size:1.05rem;margin-bottom:6px}
+.credit-application-summary p{margin:6px 0;word-break:break-word}
+.credit-application-summary ul{padding-left:1.2rem;margin:6px 0}
+.credit-application-summary a{color:#0066cc;text-decoration:none;word-break:break-all}
+.credit-application-summary a:hover{text-decoration:underline}
+.credit-application-summary .full-width{flex-basis:100%}
+
+@media (min-width:600px){
+  .credit-application-summary{padding:20px}
+  .credit-application-summary section{flex:1 1 48%}
+}
+
+@media (min-width:1000px){
+  .credit-application-summary h2{font-size:1.6rem}
+}

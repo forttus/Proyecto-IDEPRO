@@ -4,44 +4,28 @@ import { Link } from "react-router-dom";
 import usuarioImg from '../../assets/usuarios.png';
 import refiImg from '../../assets/refi.png';
 import folderesImg from '../../assets/folders.png';
-import maletinImg from '../../assets/maletin.png';
-import pcImg from '../../assets/pc.png';
-
 const Inicio = () => {
-  
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-around', padding: '40px', textDecoration: 'none', flexWrap: 'wrap', gap: '20px'}}>
+    <div style={{ display: 'flex', justifyContent: 'space-around', padding: '40px', textDecoration: 'none'}}>
       <BotonCircular
-        style={{ textDecoration: 'none' }}
-        icono={<img src={folderesImg} />}
-        texto="FOLDERS"
-        component={Link} 
+        icono={<img src={folderesImg} alt="Ícono folders" className="inicio-icon" />}
+        texto="Folders"
+        component={Link}
         to="/folders"
       />
+
       <BotonCircular
-        icono={<img src={refiImg} />}
-        texto="PRESTAMOS"
+        icono={<img src={refiImg} alt="Ícono préstamos" className="inicio-icon" />}
+        texto="Préstamos"
         component={Link}
         to="/Evaluacion"
-        />
+      />
+
       <BotonCircular
-        icono={<img src={usuarioImg} />}
-        texto="USUARIOS"
-        component={Link} 
+        icono={<img src={usuarioImg} alt="Ícono usuarios" className="inicio-icon" />}
+        texto="Usuarios"
+        component={Link}
         to="/usuarios"
-        
-      />
-      <BotonCircular
-        icono={<img src={maletinImg} />}
-        texto="WALIKY"
-        component={Link}
-        to="/waliky"
-      />
-      <BotonCircular
-        icono={<img src={pcImg} />}
-        texto="ONBOARDING"
-        component={Link}
-        to="/onboarding"
       />
     </div>
   );

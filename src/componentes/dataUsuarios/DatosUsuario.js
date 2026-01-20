@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { TextField, Box} from '@mui/material';
+import './DatosUsuario.css';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import axios from 'axios'; 
 import CryptoJS from 'crypto-js';
@@ -20,38 +21,43 @@ const imageStyle = {
 };
 
 const columns = [
-   {
+  {
     field: 'Foto',
     headerName: 'Foto',
-    width: 60,
+    minWidth: 56,
+    flex: 0.3,
     renderCell: (params) => (
       params.value ? (
         <img
           src={ params.value }
           alt="Foto"
+          className="user-image"
           style={imageStyle}
         />
       ) : (
         <img
           src={ rutaImagen }
           alt="Foto"
+          className="user-image"
           style={imageStyle}
         />
       )
     ),
   },
-  
+
   {
     field: 'Login',
     headerName: 'Login',
-    width: 120,
+    minWidth: 100,
+    flex: 0.6,
     editable: true,
-    
   },
+
   {
     field: 'Password',
     headerName: 'Password',
-    width: 150,
+    minWidth: 120,
+    flex: 0.8,
     editable: true,
     renderCell: (params) => (
       <span style={{ fontWeight: 'bold', color: 'black' }}>
@@ -59,29 +65,32 @@ const columns = [
       </span>
     ),
   },
+
   {
     field: 'Nombres',
     headerName: 'Nombre Completo',
-    width: 380,
+    minWidth: 180,
+    flex: 2,
     editable: true,
   },
- 
+
   {
     field: 'Agencia',
     headerName: 'Agencia',
-    width: 320,
+    minWidth: 140,
+    flex: 1,
     editable: true,
   },
   {
     field: 'Activo',
     headerName: 'Activo',
-    width: 180,
+    minWidth: 100,
+    flex: 0.6,
     editable: true,
     renderCell: (params) => {
-      // console.log('goku!!', params.row.Activo);
-      const dat = params.row.Activo?<CheckOutlinedIcon color="success"  sx={{ fontSize: 40 }}/>:<ClearOutlinedIcon color="error"  sx={{ fontSize: 40 }}/>
-    return dat
-  } // Renderiza el componente HalfRating
+      const dat = params.row.Activo ? <CheckOutlinedIcon color="success" sx={{ fontSize: 28 }} /> : <ClearOutlinedIcon color="error" sx={{ fontSize: 28 }} />;
+      return dat;
+    } // Renderiza el componente HalfRating
   },
 ];
 
@@ -93,7 +102,7 @@ const DatosUsuario = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://10.0.1.157:3000/api/usuarios');
+        const response = await axios.get('http://localhost:3001/api/usuarios');
         const data = response.data;
   
         const transformedData = data.map((row) => {
@@ -127,13 +136,14 @@ const DatosUsuario = () => {
 
   return (
     <Box className="datagrid-container"
-    sx={{
-    display: 'flex',
-    flexDirection: 'column',
-    // width: '100%',
-    padding: 3,
-    margin: 'auto',
-  }}
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        width: '100%',
+        maxWidth: '1100px',
+        padding: { xs: 2, sm: 3 },
+        margin: 'auto',
+      }}
     >
 
       <TextField 
@@ -157,30 +167,35 @@ const DatosUsuario = () => {
           },
         }}
       />
-      {loading ? (<CircularWithValueLabel/>):(
-        <DataGrid sx={{ border: "3px solid #333", borderRadius: '15px', padding:'12px' }}
-        rows={rowsFiltradas} // Usamos el arreglo filtrado aquí
-        columns={columns}
-        getRowId={(row) => row.IdUsuario} 
-        initialState={{
-          pagination: {
-            paginationModel: {
-              pageSize: 5, // Número de filas por página
+      {loading ? (
+        <CircularWithValueLabel />
+      ) : (
+        <DataGrid
+          autoHeight
+          sx={{ width: '100%', border: '3px solid #333', borderRadius: '15px', padding: '12px' }}
+          rows={rowsFiltradas} // Usamos el arreglo filtrado aquí
+          columns={columns}
+          getRowId={(row) => row.IdUsuario}
+          initialState={{
+            pagination: {
+              paginationModel: {
+                pageSize: 5, // Número de filas por página
+              },
             },
-          },
-        }}
-        pageSizeOptions={[5, 10,25,]} // Opciones de tamaño de página
-        slots={{
-          toolbar: GridToolbar, 
-        }}
-        slotProps={{
-          toolbar: {
-            csvOptions: {
-              utf8WithBom: true, // Asegura compatibilidad con caracteres especiales
+          }}
+          pageSizeOptions={[5, 10, 25]} // Opciones de tamaño de página
+          slots={{
+            toolbar: GridToolbar,
+          }}
+          slotProps={{
+            toolbar: {
+              csvOptions: {
+                utf8WithBom: true, // Asegura compatibilidad con caracteres especiales
+              },
             },
-          },
-        }}
-      />)}
+          }}
+        />
+      )}
     </Box>
   );
 };
