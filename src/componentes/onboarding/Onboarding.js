@@ -20,6 +20,8 @@ const Onboarding = () => {
 
     try {
       const datos = await obtenerDatosOnboarding(email);
+      console.log('Goku!!', datos);
+      
       const datosProcessados = procesarDatosOnboarding(datos);
       
       if (datosProcessados) {

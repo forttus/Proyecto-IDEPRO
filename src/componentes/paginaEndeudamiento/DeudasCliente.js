@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { obtenerDatosCliente, procesarDatosCliente } from '../../services/clienteService';
 import './DeudasCliente.css';
 
@@ -39,16 +39,6 @@ const DeudasCliente = () => {
     if (e.key === 'Enter') {
       buscarCliente();
     }
-  };
-
-  const obtenerEstadoPrestamo = (estado) => {
-    const estados = {
-      1: 'VIGENTE',
-      2: 'VIGENTE CORTO PLAZO',
-      3: 'VENCIDO',
-      4: 'CANCELADO',
-    };
-    return estados[estado] || `Estado ${estado}`;
   };
 
   return (

@@ -78,7 +78,8 @@ const Waliky = () => {
       {waliki && (
         <div className="waliky-card">
           <div className="card-header waliky-header">
-            <h3>Información Waliky - Transacción {waliki.creditCode}</h3>
+            <h3>Información Waliky - Transacción {waliki.creditCode} </h3>
+            <h3> PASO: {waliki.step}</h3>
             <span className={`status-badge ${waliki.isCreditApproved ? 'approved' : 'pending'}`}>
               {waliki.isCreditApproved ? '✓ Aprobado' : '⏳ En Proceso'}
             </span>

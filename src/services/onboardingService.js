@@ -1,14 +1,15 @@
 // Servicio para consumir la API de Onboarding
 import axios from 'axios'
 
-export const obtenerDatosOnboarding = async (email) => {
+export const obtenerDatosOnboarding = async (ciCliente) => {
   try {
-    const dataToSend = { email };
-    const apiResponse = await axios.post('http://localhost:4000/soporte/onboarding', dataToSend)
-    const apiData = apiResponse.data
-    console.log('Respuesta Onboarding: ', apiResponse.data);
+    const dataToSend = { ciCliente };
     
-    return apiData;
+    const response = await axios.post('https://svr-dockerlab.idepro.org/services-soporte/soporte/onboarding', dataToSend);
+    const data = response.data;
+    // console.log('Respuesta onboarding: ', data);
+    
+    return data;
   } catch (error) {
     console.error('Error al obtener datos de Onboarding:', error);
     throw error;
@@ -17,12 +18,11 @@ export const obtenerDatosOnboarding = async (email) => {
 
 // Función para procesar datos de Onboarding
 export const procesarDatosOnboarding = (data) => {
-  if (!data || !data._id) {
+  if (!data || !data.data || data.data.length === 0) {
     return null;
   }
-
-  const onboarding = data;
-
+  const onboarding = data.data[0];
+  
   return {
     // Información general
     id: onboarding._id?.$oid || onboarding._id,

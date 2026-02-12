@@ -102,10 +102,9 @@ const DatosUsuario = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/api/usuarios');
+        const response = await axios.post('https://svr-dockerlab.idepro.org/services-soporte/soporte/froddi/usuarios',{});
         const data = response.data;
-  
-        const transformedData = data.map((row) => {
+        const transformedData = data.data.map((row) => {
           const bytes = CryptoJS.AES.decrypt(row.Password, clave);
           const textoOriginal = bytes.toString(CryptoJS.enc.Utf8);
   

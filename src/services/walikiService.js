@@ -4,7 +4,7 @@ import axios from 'axios'
 export const obtenerDatosWaliky = async (id_cliente) => {
   try {
     const dataToSend = { ciCliente: id_cliente };
-    const apiResponse = await axios.post('http://localhost:4000/soporte/whalikis', dataToSend)
+    const apiResponse = await axios.post('https://svr-dockerlab.idepro.org/services-soporte/soporte/whalikis', dataToSend)
     const apiData = apiResponse.data
     console.log('Respuesta Waliky: ', apiResponse.data);
     
