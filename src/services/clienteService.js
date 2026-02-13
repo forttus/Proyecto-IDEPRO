@@ -4,7 +4,7 @@ import axios from 'axios'
 export const obtenerDatosCliente = async (numero_documento) => {
   try {
     const dataToSend = { ciCliente: numero_documento };
-    const apiResponse = await axios.post('http://localhost:4000/soporte/froddi/buscaCliente', dataToSend)
+    const apiResponse = await axios.post('https://svr-dockerlab.idepro.org/services-soporte/soporte/froddi/buscaCliente', dataToSend)
     const apiData = apiResponse.data
     console.log('Respuesta empoint ', apiResponse.data);
     
