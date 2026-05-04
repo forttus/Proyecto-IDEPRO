@@ -35,12 +35,15 @@ export const procesarDatosWaliky = (data) => {
     creditCode: waliki.CreditCode,
     transactionId: waliki.TransactionId,
     step: waliki.Step,
-    isCreditApproved: waliki.IsCreditAproved,
+    isCreditApproved: waliki.IsCreditApproved,
     nameOfBeneficiary: waliki.NameOfBeneficiary,
     oficialId: waliki.OficialId,
+    urlTypeClient: waliki.UrlTypeClient || '',
 
     // Información del Titular
     titular: titular ? {
+      typeClient: titular.TypeClient || '',
+      url: titular.Url || '',
       nombres: titular.Nombres,
       primerApellido: titular.PrimerApellido,
       segundoApellido: titular.SegundoApellido,
@@ -61,6 +64,8 @@ export const procesarDatosWaliky = (data) => {
 
     // Información del Garante
     garante: garante ? {
+      typeClient: garante.TypeClient || '',
+      url: garante.Url || '',
       nombres: garante.Nombres,
       primerApellido: garante.PrimerApellido,
       segundoApellido: garante.SegundoApellido,
@@ -80,10 +85,10 @@ export const procesarDatosWaliky = (data) => {
     } : null,
 
     // Información de contacto del garante
-    maritalAndGuaranteed: waliki.MaritalAndGuaranted ? {
-      phoneOfGuarante: waliki.MaritalAndGuaranted.PhoneOfGuarante,
-      emailOfGuarante: waliki.MaritalAndGuaranted.EmailOfGuarante,
-      officialIdGuarantor: waliki.MaritalAndGuaranted.OfficialIdGuarantor,
+    maritalAndGuaranteed: waliki.MaritalAndGuaranteed ? {
+      phoneOfGuarante: waliki.MaritalAndGuaranteed.PhoneOfGuarante,
+      emailOfGuarante: waliki.MaritalAndGuaranteed.EmailOfGuarante,
+      officialIdGuarantor: waliki.MaritalAndGuaranteed.OfficialIdGuarantor,
     } : null,
 
     // Información del crédito (Waliki Veloz)
@@ -109,7 +114,7 @@ export const procesarDatosWaliky = (data) => {
       descriptionActivity: waliki.ActivityMain.DescriptionActivity,
       typeOfActivity: waliki.ActivityMain.TypeOfActivity,
       openYearActivity: waliki.ActivityMain.OpenYearActivity,
-      openMonthActivity: waliki.ActivityMain.OpenMouthActivity,
+      openMonthActivity: waliki.ActivityMain.OpenMonthActivity,
     } : null,
 
     // Estado de firmas
@@ -126,4 +131,51 @@ export const procesarDatosWaliky = (data) => {
     // Fechas de registro de pasos
     registerLastStep: waliki.RegisterLastStep || {},
   };
+};
+
+// Función para obtener datos de refinanciamiento
+export const obtenerDatosRefinanciamiento = async ( idEvaluacion) => {
+  try {
+    const response = await axios.post('https://svr-dockerlab.idepro.org/services-soporte/soporte/froddi/actualizarRefi', {
+      IdEvaluacion: idEvaluacion
+    });
+    console.log('Respuesta Refinanciamiento: ', response.data);
+    return response.data;
+  } catch (error) {
+    console.error('Error al obtener datos de refinanciamiento:', error);
+    throw error;
+  }
+};
+
+// Función para procesar datos de refinanciamiento
+export const procesarDatosRefinanciamiento = (data) => {
+  if (!data || !data.data || data.data.length === 0) {
+    return null;
+  }
+
+  const refi = data.data[0];
+  return {
+    id: refi['Id_C2266522-3331-4E8A-B012-D2E2FAD140F6'] || '',
+    numeroPrestamoNetbank: refi.numeroPrestamoNetbanck || '0',
+    endeudamientoTotal: refi.Endeudamiento_Total || 0,
+    endeudamientoConCredito: refi.Endeudamiento_IDEPRO_mas_Crédito || 0,
+    prestamo1: refi.prestamo_1 || '0',
+    monto1: refi.monto_1 || 0,
+    prestamo2: refi.Préstamo_2 || '0',
+    monto2: refi.Monto_2 || 0,
+    descProducto: refi.DESCP_PRODUCTO || '',
+    producto: refi.PRODUCTO || ''
+  };
+};
+
+// Función para actualizar datos de refinanciamiento
+export const actualizarDatosRefinanciamiento = async (datos) => {
+  try {
+    const response = await axios.post('https://svr-dockerlab.idepro.org/services-soporte/soporte/froddi/setRefi', datos);
+    console.log('Datos de refinanciamiento actualizados: ', response.data);
+    return response.data;
+  } catch (error) {
+    console.error('Error al actualizar datos de refinanciamiento:', error);
+    throw error;
+  }
 };

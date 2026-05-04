@@ -116,6 +116,18 @@ const Waliky = () => {
               <h4>👤 Información del Titular</h4>
               <div className="info-grid">
                 <div className="info-item">
+                  <label>Tipo de Cliente:</label>
+                  <p>{waliki.titular.typeClient}</p>
+                </div>
+                {waliki.titular.url && (
+                  <div className="info-item full-width">
+                    <label>URL Waliki:</label>
+                    <a href={waliki.titular.url} target="_blank" rel="noopener noreferrer" className="waliki-link">
+                      {waliki.titular.url.substring(0, 50)}...
+                    </a>
+                  </div>
+                )}
+                <div className="info-item">
                   <label>Nombres:</label>
                   <p>{waliki.titular.nombres}</p>
                 </div>
@@ -160,6 +172,18 @@ const Waliky = () => {
             <div className="section">
               <h4>🤝 Información del Garante</h4>
               <div className="info-grid">
+                <div className="info-item">
+                  <label>Tipo de Cliente:</label>
+                  <p>{waliki.garante.typeClient}</p>
+                </div>
+                {waliki.garante.url && (
+                  <div className="info-item full-width">
+                    <label>URL Waliki:</label>
+                    <a href={waliki.garante.url} target="_blank" rel="noopener noreferrer" className="waliki-link">
+                      {waliki.garante.url.substring(0, 50)}...
+                    </a>
+                  </div>
+                )}
                 <div className="info-item">
                   <label>Nombres:</label>
                   <p>{waliki.garante.nombres}</p>

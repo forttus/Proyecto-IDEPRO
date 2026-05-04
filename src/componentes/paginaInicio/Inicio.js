@@ -43,6 +43,12 @@ const Inicio = () => {
         component={Link}
         to="/onboarding"
       />
+      <BotonCircular
+        icono={<img src={refiImg} />}
+        texto="REFINANCIAMIENTO"
+        component={Link}
+        to="/refinanciamiento"
+      />
     </div>
   );
 };
