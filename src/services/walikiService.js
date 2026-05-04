@@ -28,6 +28,9 @@ export const procesarDatosWaliky = (data) => {
   const garante = waliki.LegalSignatureCentralRisk?.LegalSignaturesCentralRisk?.find(
     (item) => item.Role === 'GARANTE_BUROS'
   );
+  const codeudor = waliki.LegalSignatureCentralRisk?.LegalSignaturesCentralRisk?.find(
+    (item) => item.Role === 'CODEUDOR_BUROS'
+  );
 
   return {
     // Información general
@@ -84,11 +87,34 @@ export const procesarDatosWaliky = (data) => {
       backCi: garante.BackCi,
     } : null,
 
-    // Información de contacto del garante
+    // Información del Codeudor
+    codeudor: codeudor ? {
+      typeClient: codeudor.TypeClient || '',
+      url: codeudor.Url || '',
+      nombres: codeudor.Nombres,
+      primerApellido: codeudor.PrimerApellido,
+      segundoApellido: codeudor.SegundoApellido,
+      ci: codeudor.CI,
+      departamento: codeudor.Departamento,
+      provincia: codeudor.Provincia,
+      localidad: codeudor.Localidad,
+      estadoCivil: codeudor.EstadoCivil,
+      fechaNacimiento: codeudor.FechaDeNacimiento,
+      profesion: codeudor.ProfesionUOcupacion,
+      domicilio: codeudor.Domicilio,
+      pais: codeudor.Pais,
+      isActive: codeudor.IsActive,
+      approved: codeudor.Approved,
+      frontCi: codeudor.FrontCi,
+      backCi: codeudor.BackCi,
+    } : null,
+
+    // Información de contacto (garante o codeudor)
     maritalAndGuaranteed: waliki.MaritalAndGuaranteed ? {
-      phoneOfGuarante: waliki.MaritalAndGuaranteed.PhoneOfGuarante,
-      emailOfGuarante: waliki.MaritalAndGuaranteed.EmailOfGuarante,
-      officialIdGuarantor: waliki.MaritalAndGuaranteed.OfficialIdGuarantor,
+      phoneOfMarital: waliki.MaritalAndGuaranteed.PhoneOfMarital || waliki.MaritalAndGuaranteed.PhoneOfGuarante,
+      emailOfMarital: waliki.MaritalAndGuaranteed.EmailOfMarital || waliki.MaritalAndGuaranteed.EmailOfGuarante,
+      officialIdMarital: waliki.MaritalAndGuaranteed.OfficialIdMarital || waliki.MaritalAndGuaranteed.OfficialIdGuarantor,
+      isGuaranteMarital: waliki.MaritalAndGuaranteed.IsGuaranteMarital,
     } : null,
 
     // Información del crédito (Waliki Veloz)

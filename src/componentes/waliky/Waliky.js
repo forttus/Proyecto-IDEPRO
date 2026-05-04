@@ -210,11 +210,68 @@ const Waliky = () => {
                 </div>
                 <div className="info-item">
                   <label>Teléfono:</label>
-                  <p>{waliki.maritalAndGuaranteed?.phoneOfGuarante || 'No disponible'}</p>
+                  <p>{waliki.maritalAndGuaranteed?.phoneOfMarital || waliki.maritalAndGuaranteed?.phoneOfGuarante || 'No disponible'}</p>
                 </div>
                 <div className="info-item">
                   <label>Email:</label>
-                  <p>{waliki.maritalAndGuaranteed?.emailOfGuarante || 'No disponible'}</p>
+                  <p>{waliki.maritalAndGuaranteed?.emailOfMarital || waliki.maritalAndGuaranteed?.emailOfGuarante || 'No disponible'}</p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Información del Codeudor */}
+          {waliki.codeudor && (
+            <div className="section">
+              <h4>👥 Información del Codeudor</h4>
+              <div className="info-grid">
+                <div className="info-item">
+                  <label>Tipo de Cliente:</label>
+                  <p>{waliki.codeudor.typeClient}</p>
+                </div>
+                {waliki.codeudor.url && (
+                  <div className="info-item full-width">
+                    <label>URL Waliki:</label>
+                    <a href={waliki.codeudor.url} target="_blank" rel="noopener noreferrer" className="waliki-link">
+                      {waliki.codeudor.url.substring(0, 50)}...
+                    </a>
+                  </div>
+                )}
+                <div className="info-item">
+                  <label>Nombres:</label>
+                  <p>{waliki.codeudor.nombres}</p>
+                </div>
+                <div className="info-item">
+                  <label>Apellidos:</label>
+                  <p>{waliki.codeudor.primerApellido} {waliki.codeudor.segundoApellido}</p>
+                </div>
+                <div className="info-item">
+                  <label>CI:</label>
+                  <p>{waliki.codeudor.ci}</p>
+                </div>
+                <div className="info-item">
+                  <label>Fecha de Nacimiento:</label>
+                  <p>{waliki.codeudor.fechaNacimiento}</p>
+                </div>
+                <div className="info-item">
+                  <label>Estado Civil:</label>
+                  <p>{waliki.codeudor.estadoCivil}</p>
+                </div>
+                <div className="info-item">
+                  <label>Profesión:</label>
+                  <p>{waliki.codeudor.profesion}</p>
+                </div>
+                <div className="info-item">
+                  <label>Teléfono:</label>
+                  <p>{waliki.maritalAndGuaranteed?.phoneOfMarital || 'No disponible'}</p>
+                </div>
+                <div className="info-item">
+                  <label>Email:</label>
+                  <p>{waliki.maritalAndGuaranteed?.emailOfMarital || 'No disponible'}</p>
+                </div>
+                <div className="info-item full-width">
+                  <label>Domicilio:</label>
+                  <p>{waliki.codeudor.domicilio || 'No disponible'}</p>
                 </div>
               </div>
             </div>
